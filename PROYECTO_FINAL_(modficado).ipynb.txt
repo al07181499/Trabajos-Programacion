@@ -1,0 +1,156 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **Código completo:**"
+      ],
+      "metadata": {
+        "id": "CdJfDpnySP3Y"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 6,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "4O2kf1AFPNMv",
+        "outputId": "a6d150b1-1612-4c16-dac5-e4ef8d96f757"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Ingrese su nombre: María\n",
+            "¡Bienvenido a Donaciones Regias, María !\n",
+            "Cargando.....\n",
+            "\n",
+            "¿Qué desea donar?\n",
+            "Ingrese el nombre del alimento (o escriba 'es todo' para finalizar): Tomate\n",
+            "Ingrese el peso en kg de Tomate: nose\n",
+            "Error: Ingrese una cantidad numérica válida.\n",
+            "Ingrese el nombre del alimento (o escriba 'es todo' para finalizar): Tomate\n",
+            "Ingrese el peso en kg de Tomate: jhegueyrg\n",
+            "Error: Ingrese una cantidad numérica válida.\n",
+            "Ingrese el nombre del alimento (o escriba 'es todo' para finalizar): Tomate\n",
+            "Ingrese el peso en kg de Tomate: 34\n",
+            "Ingrese el nombre del alimento (o escriba 'es todo' para finalizar): Cebolla\n",
+            "Ingrese el peso en kg de Cebolla: 75.4\n",
+            "Ingrese el nombre del alimento (o escriba 'es todo' para finalizar): Uvas\n",
+            "Ingrese el peso en kg de Uvas: 3\n",
+            "Ingrese el nombre del alimento (o escriba 'es todo' para finalizar): es todo\n",
+            "\n",
+            "Tabla de alimentos registrados:\n",
+            "  Alimento  Peso (kg)\n",
+            "0   Tomate       34.0\n",
+            "1  Cebolla       75.4\n",
+            "2     Uvas        3.0\n",
+            "Ingrese nombre del archivo: Registro\n",
+            "\n",
+            "La tabla de alimentos ha sido guardada en el archivo 'Registro.xlsx'.\n",
+            "\n",
+            "Seleccione un comedor para enviar los alimentos:\n",
+            "1. Comedor Villa de Santiago\n",
+            "2. Comedor San Nicolas\n",
+            "3. Comedor Apodaca\n",
+            "4. Comedor MTY\n",
+            "\n",
+            "Ingrese el número del comedor: 2\n",
+            "\n",
+            " Los alimentos fueron enviados a: Comedor San Nicolas\n"
+          ]
+        }
+      ],
+      "source": [
+        "try:\n",
+        "    nombre = str(input(\"Ingrese su nombre: \"))\n",
+        "    print(f\"¡Bienvenido a Donaciones Regias, {nombre} !\")\n",
+        "\n",
+        "except EOFError:\n",
+        "  print(\"/nError: No se recibió ningún dato.\")\n",
+        "except KeyboardInterrupt:\n",
+        "      print(\"\\nError: El usuario interrumpió la entrada de datos.\")\n",
+        "\n",
+        "import time #gracias a 'import' se pueden llamar a las funciones que están dentro del módulo 'time'\n",
+        "\n",
+        "def carga():\n",
+        "  print(\"Cargando\", end=\"\")\n",
+        "  for i in range(5):\n",
+        "    print(\".\",end=\"\")\n",
+        "    time.sleep(1) #'.sleep' es uno de los métodos dentro de 'time', el cual permite que el programa se pause durante la cantidad de sengundos que se pongan en el parámetro.\n",
+        "\n",
+        "carga() #invoca la función de carga()\n",
+        "print(\"\\n\") #se imprimre una nueva línea y da un salto a otra nueva línea hacia abajo\n",
+        "\n",
+        "print(\"¿Qué desea donar?\")\n",
+        "\n",
+        "import pandas as pd\n",
+        "\n",
+        "alimentos = pd.DataFrame(columns=[\"Alimento\", \"Peso (kg)\"])\n",
+        "\n",
+        "while True:   #ayudar a hacer un bucle hasta que el usuario decida detener el bucle\n",
+        "  nombre_alimento = input(\"Ingrese el nombre del alimento (o escriba 'es todo' para finalizar): \")\n",
+        "  if nombre_alimento.lower() == 'es todo':\n",
+        "    break\n",
+        "  else:\n",
+        "      try:\n",
+        "          peso = float(input(f\"Ingrese el peso en kg de {nombre_alimento}: \"))\n",
+        "          alimentos.loc[len(alimentos)] = [nombre_alimento, peso]\n",
+        "      except ValueError:\n",
+        "          print(\"Error: Ingrese una cantidad numérica válida.\")\n",
+        "\n",
+        "\n",
+        "print(\"\\nTabla de alimentos registrados:\")\n",
+        "print(alimentos)\n",
+        "\n",
+        "try:\n",
+        "    archivo = input(\"Ingrese nombre del archivo: \")#esto sirve para que al finalizar se guarde la tabla en un archivo excel\n",
+        "    extencion_archivo = f\"{archivo}.xlsx\"\n",
+        "    alimentos.to_excel(extencion_archivo, index=False)\n",
+        "    print(f\"\\nLa tabla de alimentos ha sido guardada en el archivo '{extencion_archivo}'.\")\n",
+        "except FileNotFoundError:\n",
+        "  print(\"Error: Archivo no encontrado.\")\n",
+        "\n",
+        "comedores = {\n",
+        "    1: \"Comedor Villa de Santiago\",\n",
+        "    2: \"Comedor San Nicolas\",\n",
+        "    3: \"Comedor Apodaca\",\n",
+        "    4: \"Comedor MTY\"\n",
+        "}\n",
+        "\n",
+        "print(\"\\nSeleccione un comedor para enviar los alimentos:\")\n",
+        "for key, value in comedores.items():\n",
+        "    print(f\"{key}. {value}\")\n",
+        "\n",
+        "try:\n",
+        "    opcion = int(input(\"\\nIngrese el número del comedor: \"))\n",
+        "\n",
+        "    if opcion in comedores:\n",
+        "        print(f\"\\n Los alimentos fueron enviados a: {comedores[opcion]}\")\n",
+        "    else:\n",
+        "        print(\"\\n ERROR: Ingresa el número del comedor al que deseas donar.\")\n",
+        "except KeyboardInterrupt:\n",
+        "      print(\"\\nError: El usuario interrumpió la selección.\")\n",
+        "except ValueError:\n",
+        "    print(\"Error: Ingrese un número válido.\")"
+      ]
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
