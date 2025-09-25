@@ -1,0 +1,75 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Mi código para el proyecto final."
+      ],
+      "metadata": {
+        "id": "Se-btaHAlj5C"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "try:\n",
+        "      nombre = str(input(\"Ingrese su nombre: \"))\n",
+        "          print(f\"¡Bienvenido, {nombre} !\")\n",
+        "\n",
+        "except EOFError:\n",
+        "    print(\"\\nError: No se recibió ninguna entrada.\")\n",
+        "\n",
+        "\n",
+        "while True:   #ayudar a hacer un bucle hasta que el usuario decida detener el bucle\n",
+        "  nombre_alimento = input(\"Ingrese el nombre del alimento (o escriba 'es todo' para finalizar): \")\n",
+        "  if nombre_alimento.lower() == 'es todo':\n",
+        "    break\n",
+        "  else:\n",
+        "      try:\n",
+        "          peso = float(input(f\"Ingrese el peso en kg de {nombre_alimento}: \"))\n",
+        "          alimentos.loc[len(alimentos)] = [nombre_alimento, peso]\n",
+        "      except ValueError:\n",
+        "          print(\"Error: Ingrese una cantidad numérica válida.\")\n",
+        "\n",
+        "try:\n",
+        "    archivo = input(\"Ingrese nombre del archivo: \")#esto sirve para que al finalizar se guarde la tabla en un archivo excel\n",
+        "    extencion_archivo = f\"{archivo}.xlsx\"\n",
+        "    alimentos.to_excel(extencion_archivo, index=False)\n",
+        "    print(f\"\\nLa tabla de alimentos ha sido guardada en el archivo '{extencion_archivo}'.\")\n",
+        "except FileNotFoundError:\n",
+        "  print(\"Error: Archivo no encontrado.\")\n",
+        "\n",
+        "\n",
+        "\n",
+        "try:\n",
+        "    opcion = int(input(\"\\nIngrese el número del comedor: \"))\n",
+        "\n",
+        "    if opcion in comedores:\n",
+        "        print(f\"\\n Los alimentos fueron enviados a: {comedores[opcion]}\")\n",
+        "    else:\n",
+        "        print(\"\\n ERROR: Ingresa el número del comedor al que deseas donar.\")\n",
+        "except ValueError:\n",
+        "    print(\"Error: Ingrese un número válido.\")"
+      ],
+      "metadata": {
+        "id": "r6paLTrgnTPU"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
