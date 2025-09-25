@@ -1,0 +1,464 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# **Actividad 4** - Manejo de Excel con Pandas y estructuras de controlo en cursiva"
+      ],
+      "metadata": {
+        "id": "PCDDsR3hrzTw"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Fecha de inicio: 18/09/2025.\n",
+        "\n",
+        "Fecha de entrega: 19/09/2025.\n",
+        "\n",
+        "Fecha de cierre: 19/09/22025."
+      ],
+      "metadata": {
+        "id": "Ck5Y7Ga6fU_r"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Fecha de entrega: 25 de septiembre de 2025.\n",
+        "\n",
+        "Fecha de cierre: 28 de septiembre de 2025.\n"
+      ],
+      "metadata": {
+        "id": "WxR4Dr8KAu5s"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Profesor: Carlos Daniel Morales Torres.\n",
+        "\n",
+        "Materia: Fundamentos de Programación."
+      ],
+      "metadata": {
+        "id": "58mfTcxLsAct"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Nombre: Karen Abigail Treviño Gonzalez.\n",
+        "\n",
+        "Correo: al07181499@tecmilenio.mx\n",
+        "\n",
+        "Matrícula: AL07181499"
+      ],
+      "metadata": {
+        "id": "PJCbUrmZsg59"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "XI01JdKFeWZW",
+        "outputId": "d4f1cbb8-7bf0-4bd5-d7c8-12f239172011"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "                                  NOMBRE  EDAD           Correo\n",
+            "0            karen rubi medellin guillen    18  a@tecmilenio.mx\n",
+            "1         karen abigail treviño gonzalez    17  b@tecmilenio.mx\n",
+            "2        monserrat berenice garces lopez    18  c@tecmilenio.mx\n",
+            "3  alina anubis armendariz dragustinovis    18  d@tecmilenio.mx\n",
+            "4          isauro yahir salazar almaguer    17  e@tecmilenio.mx\n"
+          ]
+        }
+      ],
+      "source": [
+        "import pandas as pd\n",
+        "df = pd.read_excel(\"/content/Tarea1.xlsx\")\n",
+        "print(df)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "import os\n",
+        "\n",
+        "ejemplo = (\"/content/Tarea1.xlsx\")\n",
+        "df = pd.read_excel(ejemplo, header=0)\n",
+        "print(df)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "vofY0NN_fCrJ",
+        "outputId": "897706c0-82d9-4e58-dca1-841eb69f35a8"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "                                  NOMBRE  EDAD           Correo\n",
+            "0            karen rubi medellin guillen    18  a@tecmilenio.mx\n",
+            "1         karen abigail treviño gonzalez    17  b@tecmilenio.mx\n",
+            "2        monserrat berenice garces lopez    18  c@tecmilenio.mx\n",
+            "3  alina anubis armendariz dragustinovis    18  d@tecmilenio.mx\n",
+            "4          isauro yahir salazar almaguer    17  e@tecmilenio.mx\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"correo\"] = df[\"NOMBRE\"].astype(str) + \"@tecmilenio.mx\"\n",
+        "print(df)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "kFkjmoyGfTvf",
+        "outputId": "05ac64e9-fcff-4408-cd42-3e802118c0b4"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "                                  NOMBRE  EDAD           Correo  \\\n",
+            "0            karen rubi medellin guillen    18  a@tecmilenio.mx   \n",
+            "1         karen abigail treviño gonzalez    17  b@tecmilenio.mx   \n",
+            "2        monserrat berenice garces lopez    18  c@tecmilenio.mx   \n",
+            "3  alina anubis armendariz dragustinovis    18  d@tecmilenio.mx   \n",
+            "4          isauro yahir salazar almaguer    17  e@tecmilenio.mx   \n",
+            "\n",
+            "                                              correo  \n",
+            "0          karen rubi medellin guillen@tecmilenio.mx  \n",
+            "1       karen abigail treviño gonzalez@tecmilenio.mx  \n",
+            "2      monserrat berenice garces lopez@tecmilenio.mx  \n",
+            "3  alina anubis armendariz dragustinovis@tecmilen...  \n",
+            "4        isauro yahir salazar almaguer@tecmilenio.mx  \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"newcolumn\"] = df[\"EDAD\"].astype(str) + \"GENERO\"\n",
+        "print(df)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "-vojf50wg_t6",
+        "outputId": "476e210b-ff5a-4ea3-f2e3-8cf1c4183d81"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "                                  NOMBRE  EDAD           Correo  \\\n",
+            "0            karen rubi medellin guillen    18  a@tecmilenio.mx   \n",
+            "1         karen abigail treviño gonzalez    17  b@tecmilenio.mx   \n",
+            "2        monserrat berenice garces lopez    18  c@tecmilenio.mx   \n",
+            "3  alina anubis armendariz dragustinovis    18  d@tecmilenio.mx   \n",
+            "4          isauro yahir salazar almaguer    17  e@tecmilenio.mx   \n",
+            "\n",
+            "                                              correo newcolumn  \n",
+            "0          karen rubi medellin guillen@tecmilenio.mx  18GENERO  \n",
+            "1       karen abigail treviño gonzalez@tecmilenio.mx  17GENERO  \n",
+            "2      monserrat berenice garces lopez@tecmilenio.mx  18GENERO  \n",
+            "3  alina anubis armendariz dragustinovis@tecmilen...  18GENERO  \n",
+            "4        isauro yahir salazar almaguer@tecmilenio.mx  17GENERO  \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"año de nacimiento\"] = df[\"EDAD\"].astype(str) + \"2007\"\n",
+        "print(df)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "aez7JzPrQrZS",
+        "outputId": "ff24c8da-0f38-4266-d786-e118c6bdc1d6"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "                                  NOMBRE  EDAD           Correo  \\\n",
+            "0            karen rubi medellin guillen    18  a@tecmilenio.mx   \n",
+            "1         karen abigail treviño gonzalez    17  b@tecmilenio.mx   \n",
+            "2        monserrat berenice garces lopez    18  c@tecmilenio.mx   \n",
+            "3  alina anubis armendariz dragustinovis    18  d@tecmilenio.mx   \n",
+            "4          isauro yahir salazar almaguer    17  e@tecmilenio.mx   \n",
+            "\n",
+            "                                              correo newcolumn  \\\n",
+            "0          karen rubi medellin guillen@tecmilenio.mx  18GENERO   \n",
+            "1       karen abigail treviño gonzalez@tecmilenio.mx  17GENERO   \n",
+            "2      monserrat berenice garces lopez@tecmilenio.mx  18GENERO   \n",
+            "3  alina anubis armendariz dragustinovis@tecmilen...  18GENERO   \n",
+            "4        isauro yahir salazar almaguer@tecmilenio.mx  17GENERO   \n",
+            "\n",
+            "  año de nacimiento  \n",
+            "0            182007  \n",
+            "1            172007  \n",
+            "2            182007  \n",
+            "3            182007  \n",
+            "4            172007  \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"lugar de nacimiento\"] = \"Monterrey, N.L.\"\n",
+        "print(df)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ErF0lXZRWboq",
+        "outputId": "25e3e0af-91ff-47d9-ff6f-eeb920caf67f"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "                                  NOMBRE  EDAD           Correo  \\\n",
+            "0            karen rubi medellin guillen    18  a@tecmilenio.mx   \n",
+            "1         karen abigail treviño gonzalez    17  b@tecmilenio.mx   \n",
+            "2        monserrat berenice garces lopez    18  c@tecmilenio.mx   \n",
+            "3  alina anubis armendariz dragustinovis    18  d@tecmilenio.mx   \n",
+            "4          isauro yahir salazar almaguer    17  e@tecmilenio.mx   \n",
+            "\n",
+            "                                              correo newcolumn  \\\n",
+            "0          karen rubi medellin guillen@tecmilenio.mx  18GENERO   \n",
+            "1       karen abigail treviño gonzalez@tecmilenio.mx  17GENERO   \n",
+            "2      monserrat berenice garces lopez@tecmilenio.mx  18GENERO   \n",
+            "3  alina anubis armendariz dragustinovis@tecmilen...  18GENERO   \n",
+            "4        isauro yahir salazar almaguer@tecmilenio.mx  17GENERO   \n",
+            "\n",
+            "  año de nacimiento lugar de nacimiento  \n",
+            "0            182007     Monterrey, N.L.  \n",
+            "1            172007     Monterrey, N.L.  \n",
+            "2            182007     Monterrey, N.L.  \n",
+            "3            182007     Monterrey, N.L.  \n",
+            "4            172007     Monterrey, N.L.  \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "i = 0  #i se refiere al numero de filas\n",
+        "# Mientras el contador sea menor al número de filas\n",
+        "while i < len(df):\n",
+        "    nombre = df.loc[i, \"NOMBRE\"]\n",
+        "    edad = df.loc[i, \"EDAD\"]\n",
+        "    correo = df.loc[i, \"correo\"]\n",
+        "    newcol = df.loc[i, \"newcolumn\"]\n",
+        "    año = df.loc[i, \"año de nacimiento\"]\n",
+        "    lugar = df.loc[i, \"lugar de nacimiento\"]\n",
+        "\n",
+        "    print(f\"Registro {i+1}:\")\n",
+        "    print(f\"  Nombre: {nombre}\")\n",
+        "    print(f\"  Edad: {edad}\")\n",
+        "    print(f\"  Correo: {correo}\")\n",
+        "    print(f\"  Extra: {newcol}\")\n",
+        "    print(f\"  Año de nacimiento: {año}\")\n",
+        "    print(f\"  Lugar de nacimiento: {lugar}\")\n",
+        "    print(\"-\" * 30)\n",
+        "\n",
+        "    i += 1"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "zNvDGCOFjKcV",
+        "outputId": "b31c34eb-d780-414c-a605-b78e9fc12b59"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Registro 1:\n",
+            "  Nombre: karen rubi medellin guillen\n",
+            "  Edad: 18\n",
+            "  Correo: karen rubi medellin guillen@tecmilenio.mx\n",
+            "  Extra: 18GENERO\n",
+            "  Año de nacimiento: 182007\n",
+            "  Lugar de nacimiento: Monterrey, N.L.\n",
+            "------------------------------\n",
+            "Registro 2:\n",
+            "  Nombre: karen abigail treviño gonzalez\n",
+            "  Edad: 17\n",
+            "  Correo: karen abigail treviño gonzalez@tecmilenio.mx\n",
+            "  Extra: 17GENERO\n",
+            "  Año de nacimiento: 172007\n",
+            "  Lugar de nacimiento: Monterrey, N.L.\n",
+            "------------------------------\n",
+            "Registro 3:\n",
+            "  Nombre: monserrat berenice garces lopez\n",
+            "  Edad: 18\n",
+            "  Correo: monserrat berenice garces lopez@tecmilenio.mx\n",
+            "  Extra: 18GENERO\n",
+            "  Año de nacimiento: 182007\n",
+            "  Lugar de nacimiento: Monterrey, N.L.\n",
+            "------------------------------\n",
+            "Registro 4:\n",
+            "  Nombre: alina anubis armendariz dragustinovis\n",
+            "  Edad: 18\n",
+            "  Correo: alina anubis armendariz dragustinovis@tecmilenio.mx\n",
+            "  Extra: 18GENERO\n",
+            "  Año de nacimiento: 182007\n",
+            "  Lugar de nacimiento: Monterrey, N.L.\n",
+            "------------------------------\n",
+            "Registro 5:\n",
+            "  Nombre: isauro yahir salazar almaguer\n",
+            "  Edad: 17\n",
+            "  Correo: isauro yahir salazar almaguer@tecmilenio.mx\n",
+            "  Extra: 17GENERO\n",
+            "  Año de nacimiento: 172007\n",
+            "  Lugar de nacimiento: Monterrey, N.L.\n",
+            "------------------------------\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "while True:\n",
+        "  buscar = str(input(\"Escribe un nombre a buscar:\"))\n",
+        "  if buscar == \"Salir\":\n",
+        "    print(\"Prgorama finalizado\")\n",
+        "    break\n",
+        "\n",
+        "    encontrado = False\n",
+        "    i = 0\n",
+        "\n",
+        "    while i < len(df):\n",
+        "      if df.loc[i, \"NOMBRE\"].lower() == buscar.lower():\n",
+        "        Encontrado = True\n",
+        "        break\n",
+        "      i += 1\n",
+        "\n",
+        "      if not Encontrado:\n",
+        "        print(\"Nombre no encontrado\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "7W4n9-SAog7I",
+        "outputId": "f4f3489e-7ac4-4622-f6c0-8ae9e41e6799"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Escribe un nombre a buscar:karen\n",
+            "Escribe un nombre a buscar:Salir\n",
+            "Prgorama finalizado\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "while True:\n",
+        "    buscar = input(\"Escribe un nombre a buscar (o 'salir' para terminar): \").lower()\n",
+        "\n",
+        "    if buscar == \"salir\":\n",
+        "        print(\"Programa finalizado.\")\n",
+        "        break\n",
+        "\n",
+        "    encontrado = False\n",
+        "    i = 0\n",
+        "\n",
+        "    while i < len(df):\n",
+        "        if df.loc[i, \"NOMBRE\"].lower() == buscar:\n",
+        "            print(f\"✅ Encontrado: {df.loc[i, 'NOMBRE']} | Edad: {df.loc[i, 'EDAD']} | Correo: {df.loc[i, 'correo']}\")\n",
+        "            encontrado = True\n",
+        "            break\n",
+        "        i += 1\n",
+        "\n",
+        "    if not encontrado:\n",
+        "        print(\"❌ No se encontró ese nombre en el registro.\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "UocuVg3SrHTS",
+        "outputId": "17069a10-feec-4a89-f571-e2e060fca908"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Escribe un nombre a buscar (o 'salir' para terminar): karen\n",
+            "❌ No se encontró ese nombre en el registro.\n",
+            "Escribe un nombre a buscar (o 'salir' para terminar): monse\n",
+            "❌ No se encontró ese nombre en el registro.\n",
+            "Escribe un nombre a buscar (o 'salir' para terminar): salir\n",
+            "Programa finalizado.\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
